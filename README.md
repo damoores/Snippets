@@ -17,7 +17,7 @@ becomes
 Doesn't look much shorter, but with autocomplete, **MUCH** quicker. And more accurate.  
   
   
-## PropertyNames Protocol/Extension
+## PropertyNames Protocol/Extension  
 This protocol and conforming extension will (generally) return a list of the Swift object's property names as an array of Strings.
 I stumbled across while trying to re-factor my CloudKit Record constructor methods. It bothered me to repeatedly pass in Keys as String, because DRY and Strings are prone to typos. Also, use of flatMap removes need for optional unwrapping.
 
@@ -56,4 +56,6 @@ to
 }
 ```  
 Concise and accurate.  
-**NOTE:** value(forKey:) on line 54 works because Location conforms to NSObject (for NSCoding purposes.)
+**NOTE:** value(forKey:) on line 54 works because Location conforms to NSObject (for NSCoding purposes.)  
+H/T to **NSHipster** for another great discussion/explanation:  
+http://nshipster.com/mirrortype/
