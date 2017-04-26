@@ -4,7 +4,14 @@
       
 ## UIResponder 'identifier' Extension 
 This simple extension returns the stringified Class name on all sub-classes of UIResponder. Which is a bunch, including UIViewController, UIView, and many more. 
-
+```
+extension UIResponder {
+    static var identifier : String {
+        return String(describing: self)
+    }
+}
+``` 
+   
 #### Example  
   
   
@@ -19,8 +26,20 @@ Doesn't look much shorter, but with autocomplete, **MUCH** quicker. And more acc
   
 ## PropertyNames Protocol/Extension  
 This protocol and conforming extension will (generally) return a list of the Swift object's property names as an array of Strings.
-I stumbled across while trying to re-factor my CloudKit Record constructor methods. It bothered me to repeatedly pass in Keys as String, because DRY and Strings are prone to typos. Also, use of flatMap removes need for optional unwrapping.
+I stumbled across while trying to re-factor my CloudKit Record constructor methods. It bothered me to repeatedly pass in Keys as String, because DRY and Strings are prone to typos. Also, use of flatMap removes need for optional unwrapping.  
+  
+```
+protocol PropertyNames {
+    func propertyNames() -> [String]
+}
 
+extension PropertyNames {
+    func propertyNames() -> [String] {
+        return Mirror(reflecting: self).children.flatMap { $0.label }
+    }
+}
+``` 
+  
 #### Example  
   
     
