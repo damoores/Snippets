@@ -1,7 +1,7 @@
 # Snippets
 ### Collection of code snippets, extensions, etc. I have found useful and future-me may want to use as well.  
   
-    
+      
 ## UIResponder 'identifier' Extension 
 This simple extension returns the stringified Class name on all sub-classes of UIResponder. Which is a bunch, including UIViewController, UIView, and many more. 
 
@@ -26,24 +26,24 @@ I stumbled across while trying to re-factor my CloudKit Record constructor metho
     
 In my TimeClock app, creating a CloudKit Record from a Location instance went from:
 ```func createCKRecordFrom(location: Location) -> CKRecord? {
-        let venueRecord = CKRecord(recordType: "Location")
-        venueRecord["displayName"] = venue.displayName as CKRecordValue
-        venueRecord["id"] = venue.id as CKRecordValue
-        venueRecord["billableRate"] = venue.billableRate as CKRecordValue
-        venueRecord["isEnabled"] = venue.isEnabled as CKRecordValue
-        if let address = venue.address {
-            venueRecord["address"] = address as CKRecordValue
+        let locationRecord = CKRecord(recordType: "Location")
+        locationRecord["displayName"] = location.displayName as CKRecordValue
+        locationRecord["id"] = location.id as CKRecordValue
+        locationRecord["billableRate"] = location.rate as CKRecordValue
+        locationRecord["isEnabled"] = location.isEnabled as CKRecordValue
+        if let address = location.address {
+            locationRecord["address"] = address as CKRecordValue
         }
-        if let city = venue.city {
-            venueRecord["city"] = city as CKRecordValue
+        if let city = location.city {
+            locationRecord["city"] = city as CKRecordValue
         }
-        if let state = venue.state {
-            venueRecord["state"] = state as CKRecordValue
+        if let state = location.state {
+            locationRecord["state"] = state as CKRecordValue
         }
-        if let zipCode = venue.zipCode {
-            venueRecord["zipCode"] = zipCode as CKRecordValue
+        if let zipCode = location.zipCode {
+            locationRecord["zipCode"] = zipCode as CKRecordValue
         }
-        return venueRecord
+        return locationRecord
 ```  
   
   
