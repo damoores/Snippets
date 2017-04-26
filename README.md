@@ -25,23 +25,24 @@ I stumbled across while trying to re-factor my CloudKit Record constructor metho
   
     
 In my TimeClock app, creating a CloudKit Record from a Location instance went from:
-```func createCKRecordFrom(location: Location) -> CKRecord? {
+```
+func createCKRecordFrom(location: Location) -> CKRecord? {
         let locationRecord = CKRecord(recordType: "Location")
-        locationRecord["displayName"] = location.displayName as CKRecordValue
-        locationRecord["id"] = location.id as CKRecordValue
-        locationRecord["billableRate"] = location.rate as CKRecordValue
-        locationRecord["isEnabled"] = location.isEnabled as CKRecordValue
+        locationRecord["displayName"] = location.displayName as? CKRecordValue
+        locationRecord["id"] = location.id as? CKRecordValue
+        locationRecord["billableRate"] = location.rate as? CKRecordValue
+        locationRecord["isEnabled"] = location.isEnabled as? CKRecordValue
         if let address = location.address {
-            locationRecord["address"] = address as CKRecordValue
+            locationRecord["address"] = address as? CKRecordValue
         }
         if let city = location.city {
-            locationRecord["city"] = city as CKRecordValue
+            locationRecord["city"] = city as? CKRecordValue
         }
         if let state = location.state {
-            locationRecord["state"] = state as CKRecordValue
+            locationRecord["state"] = state as? CKRecordValue
         }
         if let zipCode = location.zipCode {
-            locationRecord["zipCode"] = zipCode as CKRecordValue
+            locationRecord["zipCode"] = zipCode as? CKRecordValue
         }
         return locationRecord
 ```  
@@ -49,7 +50,8 @@ In my TimeClock app, creating a CloudKit Record from a Location instance went fr
   
 to  
 
-```func makeCKRecordFrom(location: Location) -> CKRecord {
+```
+func makeCKRecordFrom(location: Location) -> CKRecord {
     let locationRecord = CKRecord(recordType: location.identifier)
     location.propertyNames().flatMap { locationRecord[$0] = location.value(forKey: $0) as? CKRecordValue }
     return locationRecord
