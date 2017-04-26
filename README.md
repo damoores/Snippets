@@ -4,7 +4,7 @@
       
 ## UIResponder 'identifier' Extension 
 This simple extension returns the stringified Class name on all sub-classes of UIResponder. Which is a bunch, including UIViewController, UIView, and many more. 
-```
+```Swift
 extension UIResponder {
     static var identifier : String {
         return String(describing: self)
@@ -17,9 +17,13 @@ extension UIResponder {
   
 Leverages autocomplete to cut out a lot of repetive typing. And typos. Typos suck.  
   
-```if segue.identifier == "MyCustomViewController"```  in every prepareForSegue  
-becomes  
-```if segue.identifier == MyCustomViewController.identifier```  
+```Swift 
+if segue.identifier == "MyCustomViewController"
+```  
+in every prepareForSegue becomes:  
+```Swift
+if segue.identifier == MyCustomViewController.identifier
+```  
   
 Doesn't look much shorter, but with autocomplete, **MUCH** quicker. And more accurate.  
   
@@ -28,7 +32,7 @@ Doesn't look much shorter, but with autocomplete, **MUCH** quicker. And more acc
 This protocol and conforming extension will (generally) return a list of the Swift object's property names as an array of Strings.
 I stumbled across while trying to re-factor my CloudKit Record constructor methods. It bothered me to repeatedly pass in Keys as String, because DRY and Strings are prone to typos. Also, use of flatMap removes need for optional unwrapping.  
   
-```
+```Swift
 protocol PropertyNames {
     func propertyNames() -> [String]
 }
@@ -44,7 +48,7 @@ extension PropertyNames {
   
     
 In my TimeClock app, creating a CloudKit Record from a Location instance went from:
-```
+```Swift
 func createCKRecordFrom(location: Location) -> CKRecord? {
         let locationRecord = CKRecord(recordType: "Location")
         locationRecord["displayName"] = location.displayName as? CKRecordValue
@@ -69,7 +73,7 @@ func createCKRecordFrom(location: Location) -> CKRecord? {
   
 to  
 
-```
+```Swift
 func makeCKRecordFrom(location: Location) -> CKRecord {
     let locationRecord = CKRecord(recordType: location.identifier)
     location.propertyNames().flatMap { locationRecord[$0] = location.value(forKey: $0) as? CKRecordValue }
