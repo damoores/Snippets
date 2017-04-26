@@ -8,6 +8,13 @@
 
 import UIKit
 
+extension UIResponder {
+    /// Adds 'identifier' property to all subclasses of UIResponder
+    static var identifier : String {
+        return String(describing: self)
+    }
+}
+
 
 /**
 Conforming objects will return property names as an array of strings.
@@ -28,13 +35,6 @@ extension PropertyNames {
     }
 }
 
-
-extension UIResponder {
-    /// Adds 'identifier' property to all subclasses of UIResponder
-    static var identifier : String {
-        return String(describing: self)
-    }
-}
 
 extension UIImage {
     /// Resizes image to desired size.
