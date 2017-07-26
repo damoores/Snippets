@@ -30,7 +30,7 @@ Doesn't look much shorter, but with autocomplete, **MUCH** quicker. And more acc
   
 ## PropertyNames Protocol/Extension  
 This protocol and conforming extension will (generally) return a list of the Swift object's property names as an array of Strings.
-I stumbled across while trying to re-factor my CloudKit Record constructor methods. It bothered me to repeatedly pass in Keys as String, because DRY and Strings are prone to typos. Also, use of flatMap removes need for optional unwrapping.  
+I stumbled across while trying to re-factor my CloudKit Record constructor methods. It bothered me to repeatedly pass in Keys as String, because DRY and Strings are prone to typos. Typos suck. Also, use of flatMap removes need for optional unwrapping.  
   
 ```Swift
 protocol PropertyNames {
